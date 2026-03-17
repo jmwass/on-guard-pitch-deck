@@ -13,13 +13,8 @@
     transition: opacity 0.8s ease; pointer-events: none; overflow: hidden;
   }
   .slide.active { opacity: 1; pointer-events: all; }
-  .slide::after {
-    content: ''; position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.04; pointer-events: none; z-index: 10; mix-blend-mode: overlay;
-  }
 
-  /* S1: TITLE */
+  /* S1: TITLE — stays black */
   #s0 { background: #050a10; display: flex; align-items: center; justify-content: center; }
   .s0-mountain { position: absolute; bottom: 0; left: 0; width: 100%; }
   .s0-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.85) 100%); }
@@ -29,67 +24,70 @@
   .s0-rule { width: 1px; height: 60px; background: rgba(255,255,255,0.2); margin: 28px auto; }
   .s0-sub { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
 
-  /* S2: LOGLINE */
-  #s1 { background: #0d0d0d; display: flex; }
-  .s1-left { width: 42%; background: #0a0a0a; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; justify-content: center; padding: 60px 56px; }
-  .s1-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 56px; }
+  /* GREY SLIDE BASE — all middle slides */
+  .grey { background: #2a2e33; }
+
+  /* shared type */
   .slide-num { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 4px; color: #cc2020; text-transform: uppercase; margin-bottom: 20px; display: block; }
   .slide-heading { font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; color: #fff; letter-spacing: 3px; text-transform: uppercase; line-height: 1.1; margin-bottom: 24px; }
   .rule-h { width: 32px; height: 1px; background: #cc2020; margin-bottom: 24px; }
-  .slide-body { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.8; }
-  .logline-text { font-size: clamp(17px, 2vw, 24px); color: rgba(255,255,255,0.88); line-height: 1.7; font-style: italic; border-left: 2px solid #cc2020; padding-left: 28px; }
+  .slide-body { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+  /* S2: LOGLINE */
+  #s1 { display: flex; }
+  .s1-left { width: 42%; background: #23272b; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: center; padding: 60px 56px; }
+  .s1-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 56px; }
+  .logline-text { font-size: clamp(17px, 2vw, 24px); color: rgba(255,255,255,0.9); line-height: 1.7; font-style: italic; border-left: 2px solid #cc2020; padding-left: 28px; }
 
   /* S3: SYNOPSIS */
-  #s2 { background: #080808; display: flex; align-items: stretch; }
+  #s2 { display: flex; align-items: stretch; }
   .s2-accent { width: 4px; background: #cc2020; flex-shrink: 0; }
   .s2-content { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 72px; }
-  .synopsis-text { font-size: clamp(14px, 1.5vw, 18px); color: rgba(255,255,255,0.72); line-height: 1.9; max-width: 860px; }
+  .synopsis-text { font-size: clamp(14px, 1.5vw, 17px); color: rgba(255,255,255,0.65); line-height: 1.9; max-width: 860px; }
   .synopsis-text em { color: #fff; font-style: normal; }
 
   /* S4: THEMES */
-  #s3 { background: #000000; display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
-  #s3 .slide-num { color: #cc2020; }
-  #s3 .slide-heading { color: #111; }
+  #s3 { display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
   .themes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
-  .theme-cell { padding: 36px 32px; background: #fff; border-radius: 4px; border-top: 3px solid #cc2020; position: relative; overflow: hidden; }
-  .theme-num { font-family: Arial, sans-serif; font-size: 60px; font-weight: 700; color: rgba(0,0,0,0.04); position: absolute; top: 12px; right: 20px; line-height: 1; }
+  .theme-cell { padding: 36px 32px; background: #23272b; border-radius: 4px; border-top: 2px solid #cc2020; position: relative; overflow: hidden; }
+  .theme-num { font-family: Arial, sans-serif; font-size: 60px; font-weight: 700; color: rgba(255,255,255,0.03); position: absolute; top: 12px; right: 20px; line-height: 1; }
   .theme-title { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #cc2020; margin-bottom: 14px; display: block; }
-  .theme-body { font-size: 14px; color: #555; line-height: 1.75; }
+  .theme-body { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; }
 
   /* S5: CHARACTERS */
-  #s4 { background: #050505; display: flex; }
-  .char-half { flex: 1; padding: 64px 52px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden; }
+  #s4 { display: flex; }
+  .char-half { flex: 1; padding: 64px 52px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(255,255,255,0.07); position: relative; overflow: hidden; }
   .char-half:last-child { border-right: none; }
   .char-bg-num { position: absolute; bottom: -20px; right: -10px; font-size: 200px; font-weight: 700; color: rgba(255,255,255,0.02); font-family: Arial, sans-serif; line-height: 1; pointer-events: none; }
-  .char-initial { width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 28px; letter-spacing: 2px; }
+  .char-initial { width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 28px; letter-spacing: 2px; }
   .char-name { font-size: clamp(22px, 2.5vw, 32px); color: #fff; font-weight: 400; margin-bottom: 4px; }
   .char-role { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #cc2020; margin-bottom: 24px; }
-  .char-desc { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.75; max-width: 340px; }
+  .char-desc { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 340px; }
 
   /* S6: SHOT LIST */
-  #s5 { background: #070707; display: flex; flex-direction: column; justify-content: center; padding: 48px 64px; }
-  .shots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); border-left: 1px solid rgba(255,255,255,0.06); }
-  .shot-cell { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.06); border-right: 1px solid rgba(255,255,255,0.06); }
+  #s5 { display: flex; flex-direction: column; justify-content: center; padding: 48px 64px; }
+  .shots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); border-left: 1px solid rgba(255,255,255,0.1); }
+  .shot-cell { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); }
   .shot-label { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #cc2020; margin-bottom: 10px; display: block; }
   .shot-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  .shot-items li { font-family: Arial, sans-serif; font-size: 11px; color: rgba(255,255,255,0.38); line-height: 1.4; padding-left: 10px; position: relative; }
-  .shot-items li::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 1px; background: rgba(204,32,32,0.5); }
+  .shot-items li { font-family: Arial, sans-serif; font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.4; padding-left: 10px; position: relative; }
+  .shot-items li::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 1px; background: rgba(204,32,32,0.6); }
 
   /* S7: CREW + LOCATIONS */
-  #s6 { background: #050505; display: flex; }
-  .crew-panel { flex: 1; padding: 64px 56px; border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center; }
-  .crew-row { display: flex; align-items: baseline; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 20px; }
-  .crew-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.05); }
-  .crew-role-label { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(204,32,32,0.7); flex-shrink: 0; }
-  .crew-name-val { font-family: Georgia, serif; font-size: 14px; color: rgba(255,255,255,0.6); text-align: right; }
+  #s6 { display: flex; }
+  .crew-panel { flex: 1; padding: 64px 56px; border-right: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; justify-content: center; }
+  .crew-row { display: flex; align-items: baseline; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 20px; }
+  .crew-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
+  .crew-role-label { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(204,32,32,0.8); flex-shrink: 0; }
+  .crew-name-val { font-family: Georgia, serif; font-size: 14px; color: rgba(255,255,255,0.65); text-align: right; }
   .loc-panel { flex: 1; padding: 64px 56px; display: flex; flex-direction: column; justify-content: center; }
-  .loc-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-  .loc-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.05); }
-  .loc-type { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(204,32,32,0.7); margin-bottom: 4px; display: block; }
-  .loc-name { font-size: 15px; color: rgba(255,255,255,0.7); }
-  .loc-desc { font-family: Arial, sans-serif; font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 2px; }
+  .loc-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .loc-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
+  .loc-type { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(204,32,32,0.8); margin-bottom: 4px; display: block; }
+  .loc-name { font-size: 15px; color: rgba(255,255,255,0.75); }
+  .loc-desc { font-family: Arial, sans-serif; font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
 
-  /* S8: END */
+  /* S8: END — stays black */
   #s7 { background: #030303; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
   .end-over { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(100,10,10,0.15) 0%, transparent 70%); }
   .end-eyebrow { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(204,32,32,0.7); margin-bottom: 36px; position: relative; z-index: 2; }
@@ -99,12 +97,12 @@
 
   /* NAV */
   #nav { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; z-index: 100; }
-  .nav-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); width: 36px; height: 36px; border-radius: 2px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .nav-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); width: 36px; height: 36px; border-radius: 2px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .nav-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
   .nav-btn:disabled { opacity: 0.2; cursor: default; }
-  .dot { width: 18px; height: 1px; background: rgba(255,255,255,0.15); cursor: pointer; transition: background 0.3s, width 0.3s; }
+  .dot { width: 18px; height: 1px; background: rgba(255,255,255,0.2); cursor: pointer; transition: background 0.3s, width 0.3s; }
   .dot.active { background: #cc2020; width: 28px; }
-  #counter { position: fixed; top: 24px; right: 32px; font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.2); z-index: 100; text-transform: uppercase; }
+  #counter { position: fixed; top: 24px; right: 32px; font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.25); z-index: 100; }
   #progress { position: fixed; top: 0; left: 0; height: 1px; background: #cc2020; transition: width 0.6s ease; z-index: 200; }
 </style>
 </head>
@@ -115,7 +113,7 @@
 
   <!-- S1: TITLE -->
   <div class="slide active" id="s0">
-    <svg class="s0-mountain" viewBox="0 0 1440 380" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+    <svg class="s0-mountain" style="position:absolute;bottom:0;left:0;width:100%" viewBox="0 0 1440 380" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
       <circle cx="120" cy="60" r="1" fill="rgba(255,255,255,0.3)"/>
       <circle cx="340" cy="30" r="0.8" fill="rgba(255,255,255,0.2)"/>
       <circle cx="780" cy="20" r="1.2" fill="rgba(255,255,255,0.25)"/>
@@ -142,7 +140,7 @@
   </div>
 
   <!-- S2: LOGLINE -->
-  <div class="slide" id="s1">
+  <div class="slide grey" id="s1">
     <div class="s1-left">
       <span class="slide-num">01 — Logline</span>
       <div class="slide-heading">The<br>Pitch</div>
@@ -157,7 +155,7 @@
   </div>
 
   <!-- S3: SYNOPSIS -->
-  <div class="slide" id="s2">
+  <div class="slide grey" id="s2">
     <div class="s2-accent"></div>
     <div class="s2-content">
       <span class="slide-num">02 — Synopsis</span>
@@ -171,10 +169,10 @@
   </div>
 
   <!-- S4: THEMES -->
-  <div class="slide" id="s3">
+  <div class="slide grey" id="s3">
     <span class="slide-num" style="padding:0 72px">03 — Themes</span>
     <div class="slide-heading" style="padding:0 72px;margin-bottom:0">What It's About</div>
-    <div class="themes-grid">
+    <div class="themes-grid" style="margin:36px 72px 0">
       <div class="theme-cell">
         <div class="theme-num">I</div>
         <span class="theme-title">Invisible Work</span>
@@ -194,7 +192,7 @@
   </div>
 
   <!-- S5: CHARACTERS -->
-  <div class="slide" id="s4">
+  <div class="slide grey" id="s4">
     <div class="char-half">
       <div class="char-bg-num">HB</div>
       <div class="char-initial">H B</div>
@@ -204,7 +202,7 @@
     </div>
     <div class="char-half">
       <div class="char-bg-num">?</div>
-      <div class="char-initial" style="color:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.07)">TBD</div>
+      <div class="char-initial" style="color:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.1)">TBD</div>
       <div class="char-name" style="color:rgba(255,255,255,0.45)">Additional Patrol Member</div>
       <div class="char-role">Active Patrol Member · To Be Confirmed</div>
       <p class="char-desc">An active (preferably veteran) ski patrol member that offers perspective on the active part of the role.</p>
@@ -212,7 +210,7 @@
   </div>
 
   <!-- S6: SHOT LIST -->
-  <div class="slide" id="s5">
+  <div class="slide grey" id="s5">
     <span class="slide-num" style="padding:0 64px">04 — Visual Language</span>
     <div class="slide-heading" style="padding:0 64px;margin-bottom:0">Shot List</div>
     <div class="shots-grid">
@@ -288,7 +286,7 @@
   </div>
 
   <!-- S7: CREW + LOCATIONS -->
-  <div class="slide" id="s6">
+  <div class="slide grey" id="s6">
     <div class="crew-panel">
       <span class="slide-num">05 — Primary Crew</span>
       <div class="slide-heading" style="margin-bottom:28px">The Team</div>
