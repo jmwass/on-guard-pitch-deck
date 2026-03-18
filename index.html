@@ -126,20 +126,30 @@
 
   <!-- S2: LOGLINE -->
   <div class="slide grey" id="s1">
-    <div class="s1-left">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 100px;">
       <span class="slide-num">01 — Logline</span>
-      <div class="slide-heading">The<br>Pitch</div>
-      <div class="rule-h"></div>
-      <p class="slide-body">Labrador Mountain. Truxton, NY. A full shift, start to finish.</p>
-    </div>
-    <div class="s1-right">
-      <div class="logline-text">
-        The volunteer ski patrol at Labrador Mountain followed through a full shift, revealing the unseen responsibility required to keep the mountain safe, no matter how big or small.
+      <div style="font-size:clamp(36px,5.5vw,72px);font-weight:400;color:#fff;line-height:1.15;letter-spacing:1px;max-width:800px;">
+        Who keeps the mountain safe<br>when no one is watching?
       </div>
+      <div style="width:40px;height:1px;background:#cc2020;margin:36px 0;"></div>
+      <div style="font-family:Arial,sans-serif;font-size:15px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;">Labrador Mountain · Truxton, NY</div>
     </div>
   </div>
 
-  <!-- S3: SYNOPSIS -->
+  <!-- INSPIRATION -->
+  <div class="slide grey" id="sinspire">
+    <div class="s2-accent"></div>
+    <div class="s2-content">
+      <span class="slide-num">02 — Director's Statement</span>
+      <div class="slide-heading" style="margin-bottom:32px">Why This Film</div>
+      <p class="synopsis-text">
+        I have been a skier my entire life. The mountain has always been a place I feel at home: the cold, the quiet, the runs. But it wasn't until I started paying attention to the people in the red jackets that I realized how much was happening that I never noticed.<br><br>
+        The ski patrol was always just there. I never thought about what it took to make that possible. The early mornings, the training, the responsibility carried by people who don't get paid for any of it.<br><br>
+        <em>On Guard</em> is my attempt to finally pay attention to them.
+      </p>
+    </div>
+  </div>
+
   <div class="slide grey" id="s2">
     <div class="s2-accent"></div>
     <div class="s2-content">
@@ -277,23 +287,23 @@
       <div class="slide-heading" style="margin-bottom:28px">The Team</div>
       <div class="crew-row">
         <span class="crew-role-label">Producer / Director</span>
-        <span class="crew-name-val">Professor Jordan Kligerman</span>
+        <span class="crew-name-val">Jonah Wassersug</span>
       </div>
       <div class="crew-row">
         <span class="crew-role-label">Producer / Director</span>
-        <span class="crew-name-val">Jonah Wassersug</span>
+        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
       </div>
       <div class="crew-row">
         <span class="crew-role-label">Camera Operator / Video</span>
-        <span class="crew-name-val">Rhianna Abeel / Jonah Wassersug</span>
+        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
       </div>
       <div class="crew-row">
         <span class="crew-role-label">Audio</span>
-        <span class="crew-name-val">Harris Goldstein</span>
+        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
       </div>
       <div class="crew-row">
         <span class="crew-role-label">Editor</span>
-        <span class="crew-name-val">Jonah Wassersug</span>
+        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
       </div>
     </div>
     <div class="loc-panel">
@@ -347,7 +357,7 @@
 </div>
 
 <script>
-const SLIDES = ['s0','s1','s2','s3','s4','s5','s6','s7'];
+const SLIDES = ['s0','s1','sinspire','s2','s3','s4','s5','s6','s7'];
 const N = SLIDES.length;
 let c = 0;
 const dotsEl = document.getElementById('dots');
