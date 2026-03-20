@@ -8,127 +8,138 @@
   @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #000; height: 100vh; overflow: hidden; font-family: 'Barlow', sans-serif; }
+  body { background: #e8f0f7; height: 100vh; overflow: hidden; font-family: 'Barlow', sans-serif; }
   #deck { width: 100%; height: 100vh; position: relative; }
   .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; pointer-events: none; overflow: hidden; }
   .slide.active { opacity: 1; pointer-events: all; }
 
+  /* color tokens */
+  :root {
+    --blue: #2a7fc1;
+    --blue-dark: #1a5a8a;
+    --blue-light: #e8f0f7;
+    --blue-mid: #d0e4f2;
+    --white: #ffffff;
+    --ink: #0f1e2e;
+    --muted: #6a8aaa;
+  }
+
   .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .dim { position: absolute; inset: 0; background: rgba(0,0,0,0.52); }
-  .dim-grad { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.2) 100%); }
-  .dim-bot { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 60%, transparent 100%); }
+  .dim-bot { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,25,45,0.92) 0%, rgba(10,25,45,0.4) 55%, transparent 100%); }
+  .dim-full { position: absolute; inset: 0; background: rgba(10,25,45,0.55); }
 
-  /* ── SLIDE 1: TITLE ── */
-  #s0 { background: #050a10; }
-  #s0 .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 72px; }
-  .eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 6px; text-transform: uppercase; color: #cc2020; margin-bottom: 16px; }
+  /* ── S1: TITLE ── */
+  #s0 { background: var(--ink); }
+  .s0-inner { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 72px; }
+  .eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 6px; text-transform: uppercase; color: #7ec8f0; margin-bottom: 16px; }
   .mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(110px, 18vw, 220px); text-transform: uppercase; color: #fff; line-height: 0.88; letter-spacing: -2px; }
-  .title-meta { margin-top: 28px; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); font-family: 'Barlow Condensed', sans-serif; }
+  .title-meta { margin-top: 28px; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.3); font-family: 'Barlow Condensed', sans-serif; }
 
-  /* ── SLIDE 2: LOGLINE ── */
-  #s1 { background: #f5f0e8; }
-  #s1 .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 72px 80px; }
-  .logline-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: #cc2020; margin-bottom: 24px; }
-  .logline-big { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 110px); text-transform: uppercase; color: #111; line-height: 0.92; letter-spacing: -1px; max-width: 900px; }
-  .logline-big em { font-style: normal; color: #cc2020; }
-  .logline-sub { margin-top: 36px; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.35); font-family: 'Barlow Condensed', sans-serif; }
+  /* ── S2: LOGLINE ── */
+  #s1 { background: var(--white); }
+  .s1-inner { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 72px 80px; position: relative; }
+  .s1-stripe { position: absolute; top: 0; left: 0; width: 8px; height: 100%; background: var(--blue); }
+  .logline-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--blue); margin-bottom: 24px; }
+  .logline-big { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(52px, 7.5vw, 104px); text-transform: uppercase; color: var(--ink); line-height: 0.92; max-width: 900px; }
+  .logline-big em { font-style: normal; color: var(--blue); }
+  .logline-sub { margin-top: 36px; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-family: 'Barlow Condensed', sans-serif; }
 
-  /* ── SLIDE 3: DIRECTOR ── */
-  #sinspire { background: #111; display: flex; }
-  .inspire-left { width: 50%; background: #cc2020; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 60px; position: relative; overflow: hidden; }
-  .inspire-ghost { position: absolute; top: -20px; left: -20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 280px; color: rgba(0,0,0,0.15); text-transform: uppercase; line-height: 1; }
+  /* ── S3: DIRECTOR ── */
+  #sinspire { background: var(--blue-light); display: flex; }
+  .inspire-left { width: 46%; background: var(--blue); display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 56px; position: relative; overflow: hidden; }
+  .inspire-ghost { position: absolute; top: -10px; left: -20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 260px; color: rgba(255,255,255,0.08); text-transform: uppercase; line-height: 1; pointer-events: none; }
   .inspire-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(48px, 6vw, 80px); text-transform: uppercase; color: #fff; line-height: 0.92; position: relative; z-index: 2; }
-  .inspire-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 60px; }
-  .inspire-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 28px; }
-  .inspire-body { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.8; }
-  .inspire-body em { color: #fff; font-style: normal; }
+  .inspire-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 56px; }
+  .inspire-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--blue); margin-bottom: 28px; }
+  .inspire-body { font-size: 17px; color: #3a5570; line-height: 1.8; }
+  .inspire-body em { color: var(--ink); font-style: normal; font-weight: 500; }
 
-  /* ── SLIDE 4: SYNOPSIS ── */
-  #s2 { background: #f5f0e8; display: flex; }
+  /* ── S4: SYNOPSIS ── */
+  #s2 { background: var(--ink); display: flex; }
   .syn-left { width: 50%; display: flex; flex-direction: column; justify-content: center; padding: 72px 64px; }
-  .syn-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #cc2020; margin-bottom: 20px; }
-  .syn-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #111; line-height: 0.9; margin-bottom: 36px; }
-  .syn-body { font-size: 16px; color: #444; line-height: 1.8; }
-  .syn-body em { color: #111; font-style: normal; font-weight: 500; }
-  .syn-right { flex: 1; background: #111; display: flex; align-items: center; justify-content: center; padding: 64px 48px; }
-  .syn-quote { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(28px, 3.5vw, 44px); color: #fff; line-height: 1.2; text-transform: uppercase; border-left: 4px solid #cc2020; padding-left: 28px; }
+  .syn-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #7ec8f0; margin-bottom: 20px; }
+  .syn-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #fff; line-height: 0.9; margin-bottom: 36px; }
+  .syn-body { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+  .syn-body em { color: #fff; font-style: normal; font-weight: 500; }
+  .syn-right { flex: 1; background: var(--blue); display: flex; align-items: center; justify-content: center; padding: 64px 48px; }
+  .syn-quote { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(26px, 3vw, 40px); color: #fff; line-height: 1.25; text-transform: uppercase; border-left: 4px solid rgba(255,255,255,0.4); padding-left: 28px; }
 
-  /* ── SLIDE 5: THEMES ── */
-  #s3 { background: #111; display: flex; flex-direction: column; justify-content: center; padding: 64px 72px; }
-  .themes-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 48px; }
-  .themes-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(64px, 9vw, 120px); text-transform: uppercase; color: #fff; line-height: 1; }
-  .themes-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-  .themes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
-  .theme-cell { background: #1a1a1a; padding: 36px 32px; border-top: 3px solid #cc2020; }
-  .theme-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; text-transform: uppercase; color: #fff; margin-bottom: 12px; letter-spacing: 1px; }
-  .theme-body { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+  /* ── S5: THEMES ── */
+  #s3 { background: var(--white); display: flex; flex-direction: column; justify-content: center; padding: 64px 72px; }
+  .themes-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 44px; }
+  .themes-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(64px, 9vw, 120px); text-transform: uppercase; color: var(--ink); line-height: 1; }
+  .themes-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); }
+  .themes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .theme-cell { background: var(--blue-light); padding: 36px 32px; border-top: 4px solid var(--blue); }
+  .theme-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; text-transform: uppercase; color: var(--ink); margin-bottom: 12px; }
+  .theme-body { font-size: 15px; color: #4a6880; line-height: 1.7; }
 
-  /* ── SLIDE 6: CHARACTERS ── */
-  #s4 { background: #f5f0e8; display: flex; }
-  .char-half { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px 56px; position: relative; overflow: hidden; border-right: 2px solid #e8e3da; }
+  /* ── S6: CHARACTERS ── */
+  #s4 { background: var(--blue-light); display: flex; }
+  .char-half { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px; position: relative; overflow: hidden; border-right: 2px solid var(--blue-mid); }
   .char-half:last-child { border-right: none; }
-  .char-ghost-bg { position: absolute; top: 0; right: -20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 280px; color: rgba(0,0,0,0.04); text-transform: uppercase; line-height: 1; }
-  .char-label-tag { display: inline-block; background: #cc2020; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #fff; padding: 4px 12px; margin-bottom: 20px; }
-  .char-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(36px, 4vw, 56px); text-transform: uppercase; color: #111; line-height: 0.95; margin-bottom: 8px; }
-  .char-role-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 20px; }
-  .char-desc { font-size: 15px; color: #555; line-height: 1.7; max-width: 360px; }
+  .char-ghost-bg { position: absolute; top: -20px; right: -20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 260px; color: rgba(42,127,193,0.07); text-transform: uppercase; line-height: 1; pointer-events: none; }
+  .char-tag { display: inline-block; background: var(--blue); font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #fff; padding: 4px 12px; margin-bottom: 20px; }
+  .char-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(36px, 4vw, 56px); text-transform: uppercase; color: var(--ink); line-height: 0.95; margin-bottom: 8px; }
+  .char-role-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .char-desc { font-size: 15px; color: #3a5570; line-height: 1.7; max-width: 360px; }
 
-  /* ── SLIDE 7: SHOT LIST ── */
-  #s5 { background: #cc2020; display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
-  .shots-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 36px; }
-  .shots-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 110px); text-transform: uppercase; color: #fff; line-height: 1; }
-  .shots-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  /* ── S7: SHOT LIST ── */
+  #s5 { background: var(--blue); display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
+  .shots-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; }
+  .shots-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 100px); text-transform: uppercase; color: #fff; line-height: 1; }
+  .shots-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
   .shots-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
-  .shot-cell { background: rgba(0,0,0,0.2); padding: 20px 20px; }
+  .shot-cell { background: rgba(255,255,255,0.1); padding: 20px; }
   .shot-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #fff; margin-bottom: 10px; display: block; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; }
   .shot-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
   .shot-items li { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.4; padding-left: 10px; position: relative; }
   .shot-items li::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 1px; background: rgba(255,255,255,0.5); }
 
-  /* ── SLIDE 8: CREW ── */
-  #s6 { background: #f5f0e8; display: flex; }
-  .crew-left { width: 50%; background: #111; display: flex; flex-direction: column; justify-content: center; padding: 72px 64px; }
-  .crew-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #fff; line-height: 0.9; margin-bottom: 48px; }
-  .crew-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 16px; }
+  /* ── S8: CREW + LOCATIONS ── */
+  #s6 { background: var(--white); display: flex; }
+  .crew-left { width: 50%; background: var(--ink); display: flex; flex-direction: column; justify-content: center; padding: 72px 64px; }
+  .crew-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #fff; line-height: 0.9; margin-bottom: 44px; }
+  .crew-row { display: flex; justify-content: space-between; align-items: baseline; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 16px; }
   .crew-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
-  .crew-role { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); flex-shrink: 0; }
-  .crew-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: #fff; text-align: right; text-transform: uppercase; letter-spacing: 1px; }
+  .crew-role { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #7ec8f0; flex-shrink: 0; }
+  .crew-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: #fff; text-align: right; text-transform: uppercase; }
   .crew-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 72px 64px; }
-  .loc-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(48px, 5.5vw, 80px); text-transform: uppercase; color: #111; line-height: 0.9; margin-bottom: 40px; }
-  .loc-item { padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
-  .loc-item:first-of-type { border-top: 1px solid rgba(0,0,0,0.1); }
-  .loc-type { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #cc2020; margin-bottom: 3px; display: block; }
-  .loc-name { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; color: #111; }
-  .loc-desc { font-size: 13px; color: #888; margin-top: 2px; }
+  .loc-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(48px, 5.5vw, 76px); text-transform: uppercase; color: var(--ink); line-height: 0.9; margin-bottom: 36px; }
+  .loc-item { padding: 13px 0; border-bottom: 1px solid var(--blue-mid); }
+  .loc-item:first-of-type { border-top: 1px solid var(--blue-mid); }
+  .loc-type { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 3px; display: block; }
+  .loc-name { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; color: var(--ink); }
+  .loc-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
-  /* ── SLIDE 9: PRODUCTION ── */
-  #sprod { background: #f5f0e8; display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
-  .prod-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 36px; }
-  .prod-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #111; line-height: 0.9; }
-  .prod-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #888; }
-  .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
-  .prod-cell { background: #111; padding: 32px 28px; }
-  .prod-phase { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #cc2020; margin-bottom: 16px; display: block; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 10px; }
+  /* ── S9: PRODUCTION ── */
+  #sprod { background: var(--blue-light); display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
+  .prod-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; }
+  .prod-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(52px, 6.5vw, 88px); text-transform: uppercase; color: var(--ink); line-height: 0.9; }
+  .prod-label-txt { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); }
+  .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .prod-cell { background: var(--white); padding: 32px 28px; border-top: 4px solid var(--blue); }
+  .prod-phase { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; display: block; padding-bottom: 10px; border-bottom: 1px solid var(--blue-mid); }
   .prod-items { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  .prod-items li { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5; padding-left: 12px; position: relative; }
-  .prod-items li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 1px; background: #cc2020; }
+  .prod-items li { font-size: 14px; color: #3a5570; line-height: 1.5; padding-left: 12px; position: relative; }
+  .prod-items li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 1px; background: var(--blue); }
 
-  /* ── SLIDE 10: END ── */
-  #s7 { background: #111; }
-  #s7 .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 72px; }
+  /* ── S10: END ── */
+  #s7 { background: var(--ink); }
+  .s7-inner { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 72px; }
   .end-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(100px, 17vw, 200px); text-transform: uppercase; color: #fff; line-height: 0.88; letter-spacing: -2px; }
-  .end-rule { width: 60px; height: 3px; background: #cc2020; margin: 28px 0; }
+  .end-rule { width: 60px; height: 3px; background: var(--blue); margin: 28px 0; }
   .end-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.3); line-height: 2; }
 
   /* NAV */
   #nav { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; z-index: 100; }
-  .nav-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); width: 36px; height: 36px; border-radius: 2px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: 'Barlow Condensed', sans-serif; }
-  .nav-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .nav-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); width: 36px; height: 36px; border-radius: 2px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
   .nav-btn:disabled { opacity: 0.2; cursor: default; }
   .dot { width: 16px; height: 2px; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; }
-  .dot.active { background: #cc2020; width: 28px; }
-  #counter { position: fixed; top: 24px; right: 32px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 3px; color: rgba(255,255,255,0.2); z-index: 100; }
-  #progress { position: fixed; top: 0; left: 0; height: 2px; background: #cc2020; transition: width 0.6s ease; z-index: 200; }
+  .dot.active { background: var(--blue); width: 28px; }
+  #counter { position: fixed; top: 24px; right: 32px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 3px; color: rgba(255,255,255,0.25); z-index: 100; }
+  #progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--blue); transition: width 0.6s ease; z-index: 200; }
 </style>
 </head>
 <body>
@@ -140,7 +151,7 @@
   <div class="slide active" id="s0">
     <img class="bg-img" src="https://raw.githubusercontent.com/jmwass/on-guard/main/labmountain.jpg" alt="Labrador Mountain"/>
     <div class="dim-bot"></div>
-    <div class="content">
+    <div class="s0-inner">
       <div class="eyebrow">A Documentary Film &nbsp;·&nbsp; Newhouse Sports Media Center</div>
       <div class="mega">On<br>Guard</div>
       <div class="title-meta">Prepared by Jonah Wassersug &nbsp;·&nbsp; Labrador Mountain, Truxton NY</div>
@@ -149,7 +160,8 @@
 
   <!-- S2: LOGLINE -->
   <div class="slide" id="s1">
-    <div class="content" style="height:100%;display:flex;flex-direction:column;justify-content:center;padding:72px 80px;">
+    <div class="s1-inner">
+      <div class="s1-stripe"></div>
       <div class="logline-eyebrow">Logline</div>
       <div class="logline-big">Someone is <em>always</em> watching.<br>You just never<br>think about who.</div>
       <div class="logline-sub">Labrador Mountain &nbsp;·&nbsp; Truxton, NY</div>
@@ -212,15 +224,15 @@
   <div class="slide" id="s4">
     <div class="char-half">
       <div class="char-ghost-bg">HB</div>
-      <div class="char-label-tag">Subject 01</div>
+      <div class="char-tag">Subject 01</div>
       <div class="char-name">Helena<br>Baert</div>
       <div class="char-role-tag">Head of Ski Patrol · Labrador Mountain</div>
       <p class="char-desc">Provides leadership and overall insight regarding day-to-day managerial responsibilities. Oversees patrol operations and ensures the safety on the mountain.</p>
     </div>
     <div class="char-half">
-      <div class="char-ghost-bg" style="color:rgba(0,0,0,0.04)">?</div>
-      <div class="char-label-tag" style="background:#888">Subject 02</div>
-      <div class="char-name" style="color:#999">Additional<br>Patroller</div>
+      <div class="char-ghost-bg">?</div>
+      <div class="char-tag" style="background:var(--muted)">Subject 02</div>
+      <div class="char-name" style="color:var(--muted)">Additional<br>Patroller</div>
       <div class="char-role-tag">Active Patrol Member · To Be Confirmed</div>
       <p class="char-desc">An active (preferably veteran) ski patrol member that offers perspective on the active part of the role.</p>
     </div>
@@ -233,71 +245,14 @@
       <div class="shots-label">Visual Language</div>
     </div>
     <div class="shots-grid">
-      <div class="shot-cell">
-        <span class="shot-label">Establishing</span>
-        <ul class="shot-items">
-          <li>Drone shot of the mountain</li>
-          <li>Empty slopes</li>
-          <li>Lift operations</li>
-          <li>Whirling gears close up</li>
-          <li>People going to base area</li>
-        </ul>
-      </div>
-      <div class="shot-cell">
-        <span class="shot-label">Preparation</span>
-        <ul class="shot-items">
-          <li>Patrol suiting up</li>
-          <li>Equipment and sled prep</li>
-          <li>Radio close up</li>
-        </ul>
-      </div>
-      <div class="shot-cell">
-        <span class="shot-label">Action</span>
-        <ul class="shot-items">
-          <li>Skiing with patrol (FX3 + GoPro)</li>
-          <li>Monitoring terrain</li>
-          <li>Helping skiers (TBD)</li>
-        </ul>
-      </div>
-      <div class="shot-cell">
-        <span class="shot-label">Toboggan</span>
-        <ul class="shot-items">
-          <li>POV from inside sled</li>
-          <li>POV from patrol cam</li>
-          <li>Patrol skiing with sled (wide)</li>
-        </ul>
-      </div>
-      <div class="shot-cell">
-        <span class="shot-label">B-Roll</span>
-        <ul class="shot-items">
-          <li>Lifts, snowcat, signage</li>
-          <li>Kids skiing</li>
-          <li>Mountain far shots</li>
-        </ul>
-      </div>
-      <div class="shot-cell">
-        <span class="shot-label">Misc</span>
-        <ul class="shot-items">
-          <li>Base lodge / restaurant</li>
-          <li>Falls from POV / 360</li>
-        </ul>
-      </div>
-      <div class="shot-cell">
-        <span class="shot-label">Closing</span>
-        <ul class="shot-items">
-          <li>Empty mountain</li>
-          <li>Patrol closing runs</li>
-          <li>End of day</li>
-        </ul>
-      </div>
-      <div class="shot-cell">
-        <span class="shot-label">Cameras</span>
-        <ul class="shot-items">
-          <li>Sony FX3</li>
-          <li>GoPro</li>
-          <li>Insta360</li>
-        </ul>
-      </div>
+      <div class="shot-cell"><span class="shot-label">Establishing</span><ul class="shot-items"><li>Drone shot of the mountain</li><li>Empty slopes</li><li>Lift operations</li><li>Whirling gears close up</li><li>People going to base area</li></ul></div>
+      <div class="shot-cell"><span class="shot-label">Preparation</span><ul class="shot-items"><li>Patrol suiting up</li><li>Equipment and sled prep</li><li>Radio close up</li></ul></div>
+      <div class="shot-cell"><span class="shot-label">Action</span><ul class="shot-items"><li>Skiing with patrol (FX3 + GoPro)</li><li>Monitoring terrain</li><li>Helping skiers (TBD)</li></ul></div>
+      <div class="shot-cell"><span class="shot-label">Toboggan</span><ul class="shot-items"><li>POV from inside sled</li><li>POV from patrol cam</li><li>Patrol skiing with sled (wide)</li></ul></div>
+      <div class="shot-cell"><span class="shot-label">B-Roll</span><ul class="shot-items"><li>Lifts, snowcat, signage</li><li>Kids skiing</li><li>Mountain far shots</li></ul></div>
+      <div class="shot-cell"><span class="shot-label">Misc</span><ul class="shot-items"><li>Base lodge / restaurant</li><li>Falls from POV / 360</li></ul></div>
+      <div class="shot-cell"><span class="shot-label">Closing</span><ul class="shot-items"><li>Empty mountain</li><li>Patrol closing runs</li><li>End of day</li></ul></div>
+      <div class="shot-cell"><span class="shot-label">Cameras</span><ul class="shot-items"><li>Sony FX3</li><li>GoPro</li><li>Insta360</li></ul></div>
     </div>
   </div>
 
@@ -306,10 +261,10 @@
     <div class="crew-left">
       <div class="crew-mega">The<br>Team</div>
       <div class="crew-row"><span class="crew-role">Producer / Director</span><span class="crew-name">Jonah Wassersug</span></div>
-      <div class="crew-row"><span class="crew-role">Producer / Director</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
-      <div class="crew-row"><span class="crew-role">Camera / Video</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
-      <div class="crew-row"><span class="crew-role">Audio</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
-      <div class="crew-row"><span class="crew-role">Editor</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
+      <div class="crew-row"><span class="crew-role">Producer / Director</span><span class="crew-name" style="color:rgba(255,255,255,0.2)">?</span></div>
+      <div class="crew-row"><span class="crew-role">Camera / Video</span><span class="crew-name" style="color:rgba(255,255,255,0.2)">?</span></div>
+      <div class="crew-row"><span class="crew-role">Audio</span><span class="crew-name" style="color:rgba(255,255,255,0.2)">?</span></div>
+      <div class="crew-row"><span class="crew-role">Editor</span><span class="crew-name" style="color:rgba(255,255,255,0.2)">?</span></div>
     </div>
     <div class="crew-right">
       <div class="loc-mega">Where<br>We<br>Shoot</div>
@@ -324,37 +279,20 @@
   <div class="slide" id="sprod">
     <div class="prod-top">
       <div class="prod-mega">Production<br>Plan</div>
-      <div class="prod-label">Schedule</div>
+      <div class="prod-label-txt">Schedule</div>
     </div>
     <div class="prod-grid">
       <div class="prod-cell">
         <span class="prod-phase">Development / Pre-Production</span>
-        <ul class="prod-items">
-          <li>Location scouting on mountain and lodge areas</li>
-          <li>Confirm crew, schedule ski day + interview day</li>
-          <li>CAGE equipment availability</li>
-          <li>Shot planning for a full day with patrol</li>
-        </ul>
+        <ul class="prod-items"><li>Location scouting on mountain and lodge areas</li><li>Confirm crew, schedule ski day + interview day</li><li>CAGE equipment availability</li><li>Shot planning for a full day with patrol</li></ul>
       </div>
       <div class="prod-cell">
         <span class="prod-phase">Production</span>
-        <ul class="prod-items">
-          <li>Full-day shoot skiing alongside ski patrol</li>
-          <li>Patrol preparation and equipment checks</li>
-          <li>On-mountain footage + toboggan transport</li>
-          <li>2 interviews: head of patrol + additional patroller</li>
-        </ul>
+        <ul class="prod-items"><li>Full-day shoot skiing alongside ski patrol</li><li>Patrol preparation and equipment checks</li><li>On-mountain footage + toboggan transport</li><li>2 interviews: head of patrol + additional patroller</li></ul>
       </div>
       <div class="prod-cell">
         <span class="prod-phase">Post-Production</span>
-        <ul class="prod-items">
-          <li>Organize and review all footage</li>
-          <li>Key moments for sizzle reel and drafts</li>
-          <li>Integrate POV with cinematic footage</li>
-          <li>Edit in Premiere Pro + Insta360 Studio</li>
-          <li>Color correct, scrub audio, clean natural sounds</li>
-          <li>First cut, second cut, final timeline</li>
-        </ul>
+        <ul class="prod-items"><li>Organize and review all footage</li><li>Key moments for sizzle reel and drafts</li><li>Integrate POV with cinematic footage</li><li>Edit in Premiere Pro + Insta360 Studio</li><li>Color correct, scrub audio, clean sounds</li><li>First cut, second cut, final timeline</li></ul>
       </div>
     </div>
   </div>
@@ -362,15 +300,11 @@
   <!-- S10: END -->
   <div class="slide" id="s7">
     <img class="bg-img" src="https://raw.githubusercontent.com/jmwass/on-guard/main/labmountain.jpg" alt="Labrador Mountain"/>
-    <div class="dim"></div>
-    <div class="content">
+    <div class="dim-bot"></div>
+    <div class="s7-inner">
       <div class="end-mega">On<br>Guard</div>
       <div class="end-rule"></div>
-      <div class="end-meta">
-        Labrador Mountain · Truxton, New York<br>
-        Prepared by Jonah Wassersug · Runtime: 4–6 Minutes<br>
-        Newhouse Sports Media Center
-      </div>
+      <div class="end-meta">Labrador Mountain · Truxton, New York<br>Prepared by Jonah Wassersug · Runtime: 4–6 Minutes<br>Newhouse Sports Media Center</div>
     </div>
   </div>
 
