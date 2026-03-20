@@ -5,208 +5,233 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ON GUARD</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500&display=swap');
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #000; font-family: 'Georgia', serif; height: 100vh; overflow: hidden; }
+  body { background: #000; height: 100vh; overflow: hidden; font-family: 'Barlow', sans-serif; }
   #deck { width: 100%; height: 100vh; position: relative; }
-  .slide {
-    position: absolute; inset: 0; opacity: 0;
-    transition: opacity 0.8s ease; pointer-events: none; overflow: hidden;
-  }
+  .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; pointer-events: none; overflow: hidden; }
   .slide.active { opacity: 1; pointer-events: all; }
 
-  /* S1: TITLE — stays black */
-  #s0 { background: #050a10; display: flex; align-items: center; justify-content: center; }
-  .s0-mountain { position: absolute; bottom: 0; left: 0; width: 100%; }
-  .s0-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.85) 100%); }
-  .s0-content { position: relative; z-index: 2; text-align: center; }
-  .s0-eyebrow { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: #cc2020; margin-bottom: 28px; }
-  .s0-title { font-size: clamp(80px, 14vw, 160px); font-weight: 400; letter-spacing: 28px; text-transform: uppercase; color: #fff; line-height: 1; display: block; text-indent: 28px; }
-  .s0-rule { width: 1px; height: 60px; background: rgba(255,255,255,0.2); margin: 28px auto; }
-  .s0-sub { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dim { position: absolute; inset: 0; background: rgba(0,0,0,0.52); }
+  .dim-grad { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.2) 100%); }
+  .dim-bot { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 60%, transparent 100%); }
 
-  /* GREY SLIDE BASE — all middle slides */
-  .grey { background: #2a2e33; }
+  /* ── SLIDE 1: TITLE ── */
+  #s0 { background: #050a10; }
+  #s0 .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 72px; }
+  .eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 6px; text-transform: uppercase; color: #cc2020; margin-bottom: 16px; }
+  .mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(110px, 18vw, 220px); text-transform: uppercase; color: #fff; line-height: 0.88; letter-spacing: -2px; }
+  .title-meta { margin-top: 28px; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); font-family: 'Barlow Condensed', sans-serif; }
 
-  /* shared type */
-  .slide-num { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 4px; color: #cc2020; text-transform: uppercase; margin-bottom: 20px; display: block; }
-  .slide-heading { font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; color: #fff; letter-spacing: 3px; text-transform: uppercase; line-height: 1.1; margin-bottom: 24px; }
-  .rule-h { width: 32px; height: 1px; background: #cc2020; margin-bottom: 24px; }
-  .slide-body { font-family: Arial, sans-serif; font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+  /* ── SLIDE 2: LOGLINE ── */
+  #s1 { background: #f5f0e8; }
+  #s1 .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 72px 80px; }
+  .logline-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: #cc2020; margin-bottom: 24px; }
+  .logline-big { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 110px); text-transform: uppercase; color: #111; line-height: 0.92; letter-spacing: -1px; max-width: 900px; }
+  .logline-big em { font-style: normal; color: #cc2020; }
+  .logline-sub { margin-top: 36px; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.35); font-family: 'Barlow Condensed', sans-serif; }
 
-  /* S2: LOGLINE */
-  #s1 { display: flex; }
-  .s1-left { width: 42%; background: #23272b; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: center; padding: 60px 56px; }
-  .s1-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 56px; }
-  .logline-text { font-size: clamp(17px, 2vw, 24px); color: rgba(255,255,255,0.9); line-height: 1.7; font-style: italic; border-left: 2px solid #cc2020; padding-left: 28px; }
+  /* ── SLIDE 3: DIRECTOR ── */
+  #sinspire { background: #111; display: flex; }
+  .inspire-left { width: 50%; background: #cc2020; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 60px; position: relative; overflow: hidden; }
+  .inspire-ghost { position: absolute; top: -20px; left: -20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 280px; color: rgba(0,0,0,0.15); text-transform: uppercase; line-height: 1; }
+  .inspire-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(48px, 6vw, 80px); text-transform: uppercase; color: #fff; line-height: 0.92; position: relative; z-index: 2; }
+  .inspire-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 60px; }
+  .inspire-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 28px; }
+  .inspire-body { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+  .inspire-body em { color: #fff; font-style: normal; }
 
-  /* S3: SYNOPSIS */
-  #s2 { display: flex; align-items: stretch; }
-  .s2-accent { width: 4px; background: #cc2020; flex-shrink: 0; }
-  .s2-content { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 72px; }
-  .synopsis-text { font-size: clamp(15px, 1.7vw, 19px); color: rgba(255,255,255,0.65); line-height: 1.9; max-width: 860px; }
-  .synopsis-text em { color: #fff; font-style: normal; }
+  /* ── SLIDE 4: SYNOPSIS ── */
+  #s2 { background: #f5f0e8; display: flex; }
+  .syn-left { width: 50%; display: flex; flex-direction: column; justify-content: center; padding: 72px 64px; }
+  .syn-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #cc2020; margin-bottom: 20px; }
+  .syn-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #111; line-height: 0.9; margin-bottom: 36px; }
+  .syn-body { font-size: 16px; color: #444; line-height: 1.8; }
+  .syn-body em { color: #111; font-style: normal; font-weight: 500; }
+  .syn-right { flex: 1; background: #111; display: flex; align-items: center; justify-content: center; padding: 64px 48px; }
+  .syn-quote { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(28px, 3.5vw, 44px); color: #fff; line-height: 1.2; text-transform: uppercase; border-left: 4px solid #cc2020; padding-left: 28px; }
 
-  /* S4: THEMES */
-  #s3 { display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
-  .themes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
-  .theme-cell { padding: 36px 32px; background: #23272b; border-radius: 4px; border-top: 2px solid #cc2020; position: relative; overflow: hidden; }
-  .theme-num { font-family: Arial, sans-serif; font-size: 60px; font-weight: 700; color: rgba(255,255,255,0.03); position: absolute; top: 12px; right: 20px; line-height: 1; }
-  .theme-title { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #cc2020; margin-bottom: 14px; display: block; }
-  .theme-body { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.75; }
+  /* ── SLIDE 5: THEMES ── */
+  #s3 { background: #111; display: flex; flex-direction: column; justify-content: center; padding: 64px 72px; }
+  .themes-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 48px; }
+  .themes-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(64px, 9vw, 120px); text-transform: uppercase; color: #fff; line-height: 1; }
+  .themes-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .themes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .theme-cell { background: #1a1a1a; padding: 36px 32px; border-top: 3px solid #cc2020; }
+  .theme-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; text-transform: uppercase; color: #fff; margin-bottom: 12px; letter-spacing: 1px; }
+  .theme-body { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
-  /* S5: CHARACTERS */
-  #s4 { display: flex; }
-  .char-half { flex: 1; padding: 64px 52px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(255,255,255,0.07); position: relative; overflow: hidden; }
+  /* ── SLIDE 6: CHARACTERS ── */
+  #s4 { background: #f5f0e8; display: flex; }
+  .char-half { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px 56px; position: relative; overflow: hidden; border-right: 2px solid #e8e3da; }
   .char-half:last-child { border-right: none; }
-  .char-bg-num { position: absolute; bottom: -20px; right: -10px; font-size: 200px; font-weight: 700; color: rgba(255,255,255,0.02); font-family: Arial, sans-serif; line-height: 1; pointer-events: none; }
-  .char-initial { width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 28px; letter-spacing: 2px; }
-  .char-name { font-size: clamp(22px, 2.5vw, 32px); color: #fff; font-weight: 400; margin-bottom: 4px; }
-  .char-role { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #cc2020; margin-bottom: 24px; }
-  .char-desc { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 340px; }
+  .char-ghost-bg { position: absolute; top: 0; right: -20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 280px; color: rgba(0,0,0,0.04); text-transform: uppercase; line-height: 1; }
+  .char-label-tag { display: inline-block; background: #cc2020; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #fff; padding: 4px 12px; margin-bottom: 20px; }
+  .char-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(36px, 4vw, 56px); text-transform: uppercase; color: #111; line-height: 0.95; margin-bottom: 8px; }
+  .char-role-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 20px; }
+  .char-desc { font-size: 15px; color: #555; line-height: 1.7; max-width: 360px; }
 
-  /* S6: SHOT LIST */
-  #s5 { display: flex; flex-direction: column; justify-content: center; padding: 48px 64px; }
-  .shots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); border-left: 1px solid rgba(255,255,255,0.1); }
-  .shot-cell { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); }
-  .shot-label { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #fff; margin-bottom: 10px; display: block; }
-  .shot-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  .shot-items li { font-family: Arial, sans-serif; font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; padding-left: 10px; position: relative; }
-  .shot-items li::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 1px; background: rgba(204,32,32,0.6); }
+  /* ── SLIDE 7: SHOT LIST ── */
+  #s5 { background: #cc2020; display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
+  .shots-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 36px; }
+  .shots-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 8vw, 110px); text-transform: uppercase; color: #fff; line-height: 1; }
+  .shots-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .shots-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+  .shot-cell { background: rgba(0,0,0,0.2); padding: 20px 20px; }
+  .shot-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #fff; margin-bottom: 10px; display: block; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; }
+  .shot-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .shot-items li { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.4; padding-left: 10px; position: relative; }
+  .shot-items li::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 1px; background: rgba(255,255,255,0.5); }
 
-  /* S7: CREW + LOCATIONS */
-  #s6 { display: flex; }
-  .crew-panel { flex: 1; padding: 64px 56px; border-right: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; justify-content: center; }
-  .crew-row { display: flex; align-items: baseline; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 20px; }
+  /* ── SLIDE 8: CREW ── */
+  #s6 { background: #f5f0e8; display: flex; }
+  .crew-left { width: 50%; background: #111; display: flex; flex-direction: column; justify-content: center; padding: 72px 64px; }
+  .crew-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #fff; line-height: 0.9; margin-bottom: 48px; }
+  .crew-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 16px; }
   .crew-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
-  .crew-role-label { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(204,32,32,0.8); flex-shrink: 0; }
-  .crew-name-val { font-family: Georgia, serif; font-size: 14px; color: rgba(255,255,255,0.65); text-align: right; }
-  .loc-panel { flex: 1; padding: 64px 56px; display: flex; flex-direction: column; justify-content: center; }
-  .loc-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
-  .loc-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
-  .loc-type { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(204,32,32,0.8); margin-bottom: 4px; display: block; }
-  .loc-name { font-size: 15px; color: rgba(255,255,255,0.75); }
-  .loc-desc { font-family: Arial, sans-serif; font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .crew-role { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); flex-shrink: 0; }
+  .crew-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: #fff; text-align: right; text-transform: uppercase; letter-spacing: 1px; }
+  .crew-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 72px 64px; }
+  .loc-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(48px, 5.5vw, 80px); text-transform: uppercase; color: #111; line-height: 0.9; margin-bottom: 40px; }
+  .loc-item { padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .loc-item:first-of-type { border-top: 1px solid rgba(0,0,0,0.1); }
+  .loc-type { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #cc2020; margin-bottom: 3px; display: block; }
+  .loc-name { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; color: #111; }
+  .loc-desc { font-size: 13px; color: #888; margin-top: 2px; }
 
-  /* S8: END — stays black */
-  #s7 { background: #030303; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  .end-over { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(100,10,10,0.15) 0%, transparent 70%); }
-  .end-eyebrow { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(204,32,32,0.7); margin-bottom: 36px; position: relative; z-index: 2; }
-  .end-title { font-size: clamp(60px, 10vw, 120px); font-weight: 400; letter-spacing: 22px; text-transform: uppercase; color: #fff; line-height: 1; text-indent: 22px; position: relative; z-index: 2; }
-  .end-rule { width: 40px; height: 1px; background: rgba(255,255,255,0.15); margin: 36px auto; position: relative; z-index: 2; }
-  .end-meta { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.2); position: relative; z-index: 2; line-height: 2.2; }
+  /* ── SLIDE 9: PRODUCTION ── */
+  #sprod { background: #f5f0e8; display: flex; flex-direction: column; justify-content: center; padding: 56px 72px; }
+  .prod-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 36px; }
+  .prod-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(56px, 7vw, 96px); text-transform: uppercase; color: #111; line-height: 0.9; }
+  .prod-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #888; }
+  .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .prod-cell { background: #111; padding: 32px 28px; }
+  .prod-phase { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #cc2020; margin-bottom: 16px; display: block; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 10px; }
+  .prod-items { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .prod-items li { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5; padding-left: 12px; position: relative; }
+  .prod-items li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 1px; background: #cc2020; }
+
+  /* ── SLIDE 10: END ── */
+  #s7 { background: #111; }
+  #s7 .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 64px 72px; }
+  .end-mega { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(100px, 17vw, 200px); text-transform: uppercase; color: #fff; line-height: 0.88; letter-spacing: -2px; }
+  .end-rule { width: 60px; height: 3px; background: #cc2020; margin: 28px 0; }
+  .end-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.3); line-height: 2; }
 
   /* NAV */
-  #nav { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; z-index: 100; }
-  .nav-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); width: 36px; height: 36px; border-radius: 2px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  #nav { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; z-index: 100; }
+  .nav-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); width: 36px; height: 36px; border-radius: 2px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: 'Barlow Condensed', sans-serif; }
   .nav-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
   .nav-btn:disabled { opacity: 0.2; cursor: default; }
-  .dot { width: 18px; height: 1px; background: rgba(255,255,255,0.2); cursor: pointer; transition: background 0.3s, width 0.3s; }
+  .dot { width: 16px; height: 2px; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; }
   .dot.active { background: #cc2020; width: 28px; }
-  #counter { position: fixed; top: 24px; right: 32px; font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.25); z-index: 100; }
-  #progress { position: fixed; top: 0; left: 0; height: 1px; background: #cc2020; transition: width 0.6s ease; z-index: 200; }
+  #counter { position: fixed; top: 24px; right: 32px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 3px; color: rgba(255,255,255,0.2); z-index: 100; }
+  #progress { position: fixed; top: 0; left: 0; height: 2px; background: #cc2020; transition: width 0.6s ease; z-index: 200; }
 </style>
 </head>
 <body>
 <div id="progress"></div>
-<div id="counter">01 / 08</div>
+<div id="counter">01 / 10</div>
 <div id="deck">
 
   <!-- S1: TITLE -->
   <div class="slide active" id="s0">
-    <img id="title-bg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" src="https://raw.githubusercontent.com/jmwass/on-guard/main/labmountain.jpg" alt="Labrador Mountain"/>
-    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.3) 100%);"></div>
-    <div class="s0-vignette"></div>
-    <div class="s0-content">
-      <div class="s0-eyebrow">A Documentary Film &nbsp;·&nbsp; Newhouse Sports Media Center</div>
-      <span class="s0-title">On Guard</span>
-      <div class="s0-rule"></div>
-      <div class="s0-sub">Prepared by Jonah Wassersug</div>
+    <img class="bg-img" src="https://raw.githubusercontent.com/jmwass/on-guard/main/labmountain.jpg" alt="Labrador Mountain"/>
+    <div class="dim-bot"></div>
+    <div class="content">
+      <div class="eyebrow">A Documentary Film &nbsp;·&nbsp; Newhouse Sports Media Center</div>
+      <div class="mega">On<br>Guard</div>
+      <div class="title-meta">Prepared by Jonah Wassersug &nbsp;·&nbsp; Labrador Mountain, Truxton NY</div>
     </div>
   </div>
 
   <!-- S2: LOGLINE -->
-  <div class="slide grey" id="s1">
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:80px 100px;">
-      <span class="slide-num">01 — Logline</span>
-      <div style="font-size:clamp(36px,5.5vw,72px);font-weight:400;color:#fff;line-height:1.15;letter-spacing:1px;max-width:800px;">
-        Someone is always watching.<br>You just never think about who.
-      </div>
-      <div style="width:40px;height:1px;background:#cc2020;margin:36px 0;"></div>
-      <div style="font-family:Arial,sans-serif;font-size:15px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;">Labrador Mountain · Truxton, NY</div>
+  <div class="slide" id="s1">
+    <div class="content" style="height:100%;display:flex;flex-direction:column;justify-content:center;padding:72px 80px;">
+      <div class="logline-eyebrow">Logline</div>
+      <div class="logline-big">Someone is <em>always</em> watching.<br>You just never<br>think about who.</div>
+      <div class="logline-sub">Labrador Mountain &nbsp;·&nbsp; Truxton, NY</div>
     </div>
   </div>
 
-  <!-- INSPIRATION -->
-  <div class="slide grey" id="sinspire">
-    <div class="s2-accent"></div>
-    <div class="s2-content">
-      <span class="slide-num">02 — Director's Statement</span>
-      <div class="slide-heading" style="margin-bottom:32px">Why This Film</div>
-      <p class="synopsis-text">
-        I have been a skier my entire life. The mountain is not just a hobby for me, it is where I grew up. Spending winters on the slopes gave me a deep appreciation for the environment and the people who make it possible. When I started noticing the patrol, I realized I had been taking them for granted my entire life. That felt like a story worth telling.<br><br>
-        But this film is not just for skiers. At its core, <em>On Guard</em> is a story about ordinary people who show up every weekend and take on real responsibility for the safety of complete strangers. No paycheck, no recognition. That is something anyone can connect with, whether they have ever seen snow or not.
+  <!-- S3: DIRECTOR -->
+  <div class="slide" id="sinspire">
+    <div class="inspire-left">
+      <div class="inspire-ghost">Why</div>
+      <div class="inspire-heading">Why<br>This<br>Film</div>
+    </div>
+    <div class="inspire-right">
+      <div class="inspire-label">Director's Statement</div>
+      <p class="inspire-body">
+        I have been a skier my entire life. The mountain is not just a hobby for me, it is where I grew up. When I started noticing the patrol, I realized I had been taking them for granted my entire life. That felt like a story worth telling.<br><br>
+        But this film is not just for skiers. <em>On Guard</em> is a story about ordinary people who show up every weekend for complete strangers. No paycheck, no recognition. Anyone can connect with that.
       </p>
     </div>
   </div>
 
-  <div class="slide grey" id="s2">
-    <div class="s2-accent"></div>
-    <div class="s2-content">
-      <span class="slide-num">02 — Synopsis</span>
-      <div class="slide-heading" style="margin-bottom:32px">The Story</div>
-      <p class="synopsis-text">
-        Every winter, millions of skiers and snowboarders go to the popular resorts of Aspen, Vail, and Park City, chasing the vast and challenging terrain of the Western Mountains. Tucked away in the hills of Central New York sits a small ski mountain called <em>Labrador Mountain</em>.<br><br>
-        While the big mountains have thousands of employees who come from the states and countries abroad, local spots like Labrador rely on a different breed of employees: the volunteers. <em>On Guard</em> follows these volunteer ski patrollers, like Phil, to show what it actually takes to keep the slopes safe. During the working hours, these patrollers live normal lives; some are teachers, car salesmen and office workers, but when they clock out of work, they clock in as first responders on the mountain. Rather than for a paycheck, these regular people spend the cold weekends in a red jacket for the love of the mountain.<br><br>
-        This film is not just about the work, but rather the <em>comradery</em> of the group that keeps the hill running. As the mountain opens and closes each day, all runs depend on decisions that most people never think about. The freedom on the slopes is only possible because someone like Phil is always watching.
+  <!-- S4: SYNOPSIS -->
+  <div class="slide" id="s2">
+    <div class="syn-left">
+      <div class="syn-label">Synopsis</div>
+      <div class="syn-heading">The<br>Story</div>
+      <p class="syn-body">
+        Every winter, millions chase the terrain of Aspen, Vail, and Park City. Tucked away in the hills of Central New York sits <em>Labrador Mountain</em>.<br><br>
+        <em>On Guard</em> follows the volunteers who keep it running. Teachers, car salesmen, office workers by week. First responders on the mountain by weekend.
       </p>
+    </div>
+    <div class="syn-right">
+      <div class="syn-quote">"The freedom on the slopes is only possible because someone like Phil is always watching."</div>
     </div>
   </div>
 
-  <!-- S4: THEMES -->
-  <div class="slide grey" id="s3">
-    <span class="slide-num" style="padding:0 72px">03 — Themes</span>
-    <div class="slide-heading" style="padding:0 72px;margin-bottom:0">What It's About</div>
-    <div class="themes-grid" style="margin:36px 72px 0">
+  <!-- S5: THEMES -->
+  <div class="slide" id="s3">
+    <div class="themes-top">
+      <div class="themes-mega">Themes</div>
+      <div class="themes-label">What It's About</div>
+    </div>
+    <div class="themes-grid">
       <div class="theme-cell">
-        <div class="theme-num">I</div>
-        <span class="theme-title">Invisible Work</span>
+        <div class="theme-name">Invisible Work</div>
         <p class="theme-body">Many mountaingoers do not see the work that these patrollers have to take on to keep the mountain safe.</p>
       </div>
       <div class="theme-cell">
-        <div class="theme-num">II</div>
-        <span class="theme-title">Responsibility</span>
-        <p class="theme-body">The patrol members for Labrador Mountain are all volunteers and have a plate of responsibilities that they take on for the love of the environment, rather than the paycheck.</p>
+        <div class="theme-name">Responsibility</div>
+        <p class="theme-body">All volunteers. A full plate of responsibilities taken on for the love of the environment, rather than the paycheck.</p>
       </div>
       <div class="theme-cell">
-        <div class="theme-num">III</div>
-        <span class="theme-title">Comradery</span>
-        <p class="theme-body">The comradery aspect is extremely important as the team needs to be close to run effectively — and this is very evident from the day spent that they are extremely close.</p>
+        <div class="theme-name">Comradery</div>
+        <p class="theme-body">The team needs to be close to run effectively. From the day spent with them, it is very evident that they are.</p>
       </div>
     </div>
   </div>
 
-  <!-- S5: CHARACTERS -->
-  <div class="slide grey" id="s4">
+  <!-- S6: CHARACTERS -->
+  <div class="slide" id="s4">
     <div class="char-half">
-      <div class="char-bg-num">HB</div>
-      <div class="char-initial">H B</div>
-      <div class="char-name">Helena Baert</div>
-      <div class="char-role">Head of Ski Patrol · Labrador Mountain</div>
-      <p class="char-desc">Head of the Ski Patrol at Labrador Mountain. Provides leadership and overall insight regarding day-to-day managerial responsibilities and oversees patrol operations and ensures the safety on the mountain.</p>
+      <div class="char-ghost-bg">HB</div>
+      <div class="char-label-tag">Subject 01</div>
+      <div class="char-name">Helena<br>Baert</div>
+      <div class="char-role-tag">Head of Ski Patrol · Labrador Mountain</div>
+      <p class="char-desc">Provides leadership and overall insight regarding day-to-day managerial responsibilities. Oversees patrol operations and ensures the safety on the mountain.</p>
     </div>
     <div class="char-half">
-      <div class="char-bg-num">?</div>
-      <div class="char-initial" style="color:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.1)">TBD</div>
-      <div class="char-name" style="color:rgba(255,255,255,0.45)">Additional Patrol Member</div>
-      <div class="char-role">Active Patrol Member · To Be Confirmed</div>
+      <div class="char-ghost-bg" style="color:rgba(0,0,0,0.04)">?</div>
+      <div class="char-label-tag" style="background:#888">Subject 02</div>
+      <div class="char-name" style="color:#999">Additional<br>Patroller</div>
+      <div class="char-role-tag">Active Patrol Member · To Be Confirmed</div>
       <p class="char-desc">An active (preferably veteran) ski patrol member that offers perspective on the active part of the role.</p>
     </div>
   </div>
 
-  <!-- S6: SHOT LIST -->
-  <div class="slide grey" id="s5">
-    <span class="slide-num" style="padding:0 64px">04 — Visual Language</span>
-    <div class="slide-heading" style="padding:0 64px;margin-bottom:0">Shot List</div>
+  <!-- S7: SHOT LIST -->
+  <div class="slide" id="s5">
+    <div class="shots-top">
+      <div class="shots-mega">Shot List</div>
+      <div class="shots-label">Visual Language</div>
+    </div>
     <div class="shots-grid">
       <div class="shot-cell">
         <span class="shot-label">Establishing</span>
@@ -214,24 +239,24 @@
           <li>Drone shot of the mountain</li>
           <li>Empty slopes</li>
           <li>Lift operations</li>
-          <li>Up close angle of whirling gears</li>
+          <li>Whirling gears close up</li>
           <li>People going to base area</li>
         </ul>
       </div>
       <div class="shot-cell">
         <span class="shot-label">Preparation</span>
         <ul class="shot-items">
-          <li>Patrol suiting up (boots, jacket)</li>
-          <li>Equipment and sled preparation</li>
+          <li>Patrol suiting up</li>
+          <li>Equipment and sled prep</li>
           <li>Radio close up</li>
         </ul>
       </div>
       <div class="shot-cell">
         <span class="shot-label">Action</span>
         <ul class="shot-items">
-          <li>Skiing with patrol (FX3 and GoPro)</li>
+          <li>Skiing with patrol (FX3 + GoPro)</li>
           <li>Monitoring terrain</li>
-          <li>Helping skiers (TBD / privacy concern)</li>
+          <li>Helping skiers (TBD)</li>
         </ul>
       </div>
       <div class="shot-cell">
@@ -239,25 +264,22 @@
         <ul class="shot-items">
           <li>POV from inside sled</li>
           <li>POV from patrol cam</li>
-          <li>Patrol skiing with sled from afar</li>
+          <li>Patrol skiing with sled (wide)</li>
         </ul>
       </div>
       <div class="shot-cell">
         <span class="shot-label">B-Roll</span>
         <ul class="shot-items">
-          <li>Lifts</li>
-          <li>Snowcat</li>
-          <li>Skis stationary</li>
-          <li>Signage</li>
+          <li>Lifts, snowcat, signage</li>
           <li>Kids skiing</li>
           <li>Mountain far shots</li>
         </ul>
       </div>
       <div class="shot-cell">
-        <span class="shot-label">Misc / People</span>
+        <span class="shot-label">Misc</span>
         <ul class="shot-items">
-          <li>Everyone on base lodge / restaurant</li>
-          <li>Falls from POV shot / 360</li>
+          <li>Base lodge / restaurant</li>
+          <li>Falls from POV / 360</li>
         </ul>
       </div>
       <div class="shot-cell">
@@ -279,113 +301,76 @@
     </div>
   </div>
 
-  <!-- S7: CREW + LOCATIONS -->
-  <div class="slide grey" id="s6">
-    <div class="crew-panel">
-      <span class="slide-num">05 — Primary Crew</span>
-      <div class="slide-heading" style="margin-bottom:28px">The Team</div>
-      <div class="crew-row">
-        <span class="crew-role-label">Producer / Director</span>
-        <span class="crew-name-val">Jonah Wassersug</span>
-      </div>
-      <div class="crew-row">
-        <span class="crew-role-label">Producer / Director</span>
-        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
-      </div>
-      <div class="crew-row">
-        <span class="crew-role-label">Camera Operator / Video</span>
-        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
-      </div>
-      <div class="crew-row">
-        <span class="crew-role-label">Audio</span>
-        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
-      </div>
-      <div class="crew-row">
-        <span class="crew-role-label">Editor</span>
-        <span class="crew-name-val" style="color:rgba(255,255,255,0.3)">?</span>
-      </div>
+  <!-- S8: CREW + LOCATIONS -->
+  <div class="slide" id="s6">
+    <div class="crew-left">
+      <div class="crew-mega">The<br>Team</div>
+      <div class="crew-row"><span class="crew-role">Producer / Director</span><span class="crew-name">Jonah Wassersug</span></div>
+      <div class="crew-row"><span class="crew-role">Producer / Director</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
+      <div class="crew-row"><span class="crew-role">Camera / Video</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
+      <div class="crew-row"><span class="crew-role">Audio</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
+      <div class="crew-row"><span class="crew-role">Editor</span><span class="crew-name" style="color:rgba(255,255,255,0.25)">?</span></div>
     </div>
-    <div class="loc-panel">
-      <span class="slide-num">06 — Locations & Distribution</span>
-      <div class="slide-heading" style="margin-bottom:28px">Where & How</div>
-      <div class="loc-item">
-        <span class="loc-type">Primary Location</span>
-        <div class="loc-name">Labrador Mountain, Truxton NY</div>
-        <div class="loc-desc">Chairlifts, trails (skiing and sled work) and the base area</div>
-      </div>
-      <div class="loc-item">
-        <span class="loc-type">Patrol HQ</span>
-        <div class="loc-name">Labrador Mountain Ski Patrol HQ</div>
-        <div class="loc-desc">The "locker room" for patrollers</div>
-      </div>
-      <div class="loc-item">
-        <span class="loc-type">Aid Room</span>
-        <div class="loc-name">Labrador Mountain Ski Patrol Aid Room</div>
-        <div class="loc-desc">Emergency room of the mountain</div>
-      </div>
-      <div class="loc-item" style="border-bottom:none">
-        <span class="loc-type">Distribution</span>
-        <div class="loc-name">Newhouse Sports Media Center YouTube Channel</div>
-        <div class="loc-desc">And all other relevant media platforms · Runtime: 4–6 minutes</div>
-      </div>
+    <div class="crew-right">
+      <div class="loc-mega">Where<br>We<br>Shoot</div>
+      <div class="loc-item"><span class="loc-type">Primary</span><div class="loc-name">Labrador Mountain</div><div class="loc-desc">Chairlifts, trails, sled work, base area · Truxton, NY</div></div>
+      <div class="loc-item"><span class="loc-type">Patrol HQ</span><div class="loc-name">Ski Patrol HQ</div><div class="loc-desc">The "locker room" for patrollers</div></div>
+      <div class="loc-item"><span class="loc-type">Aid Room</span><div class="loc-name">Ski Patrol Aid Room</div><div class="loc-desc">Emergency room of the mountain</div></div>
+      <div class="loc-item" style="border-bottom:none"><span class="loc-type">Distribution</span><div class="loc-name">Newhouse Sports Media Center</div><div class="loc-desc">YouTube + all media platforms · Runtime: 4–6 min</div></div>
     </div>
   </div>
 
-  <!-- PRODUCTION PLAN -->
-  <div class="slide grey" id="sprod">
-    <span class="slide-num" style="padding:0 64px">07 — Production Plan</span>
-    <div class="slide-heading" style="padding:0 64px;margin-bottom:0">Schedule</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:32px 64px 0;border-top:1px solid rgba(255,255,255,0.1);border-left:1px solid rgba(255,255,255,0.1);">
-
-      <div style="padding:28px;border-bottom:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.1);">
-        <span style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#cc2020;margin-bottom:12px;display:block;">Development / Pre-Production</span>
-        <ul class="shot-items">
-          <li>Location scouting on mountain and surrounding lodge areas</li>
-          <li>Confirm crew and schedule ski day + interview day</li>
+  <!-- S9: PRODUCTION -->
+  <div class="slide" id="sprod">
+    <div class="prod-top">
+      <div class="prod-mega">Production<br>Plan</div>
+      <div class="prod-label">Schedule</div>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-cell">
+        <span class="prod-phase">Development / Pre-Production</span>
+        <ul class="prod-items">
+          <li>Location scouting on mountain and lodge areas</li>
+          <li>Confirm crew, schedule ski day + interview day</li>
           <li>CAGE equipment availability</li>
-          <li>Shot planning focused on capturing a full day with patrol</li>
+          <li>Shot planning for a full day with patrol</li>
         </ul>
       </div>
-
-      <div style="padding:28px;border-bottom:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.1);">
-        <span style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#cc2020;margin-bottom:12px;display:block;">Production</span>
-        <ul class="shot-items">
+      <div class="prod-cell">
+        <span class="prod-phase">Production</span>
+        <ul class="prod-items">
           <li>Full-day shoot skiing alongside ski patrol</li>
           <li>Patrol preparation and equipment checks</li>
-          <li>On-mountain footage</li>
-          <li>Toboggan transport</li>
+          <li>On-mountain footage + toboggan transport</li>
           <li>2 interviews: head of patrol + additional patroller</li>
         </ul>
       </div>
-
-      <div style="padding:28px;border-bottom:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.1);">
-        <span style="font-family:Arial,sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#cc2020;margin-bottom:12px;display:block;">Post-Production</span>
-        <ul class="shot-items">
-          <li>Organize and review all footage (FX3, GoPro, Insta360)</li>
-          <li>Find key moments for sizzle reel and drafts</li>
-          <li>Integrate POV footage with cinematic footage</li>
-          <li>Edit in Adobe Premiere Pro and Insta360 Studio</li>
+      <div class="prod-cell">
+        <span class="prod-phase">Post-Production</span>
+        <ul class="prod-items">
+          <li>Organize and review all footage</li>
+          <li>Key moments for sizzle reel and drafts</li>
+          <li>Integrate POV with cinematic footage</li>
+          <li>Edit in Premiere Pro + Insta360 Studio</li>
           <li>Color correct, scrub audio, clean natural sounds</li>
-          <li>Complete first cut, second cut, and final timeline</li>
+          <li>First cut, second cut, final timeline</li>
         </ul>
       </div>
-
     </div>
   </div>
 
-  <!-- S8: END -->
+  <!-- S10: END -->
   <div class="slide" id="s7">
-    <div class="end-over"></div>
-    <svg style="position:absolute;bottom:0;left:0;width:100%;opacity:0.06" viewBox="0 0 1440 260" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="0,260 200,120 400,200 600,80 800,180 1000,60 1200,160 1440,100 1440,260" fill="white"/>
-    </svg>
-    <div class="end-eyebrow">Newhouse Sports Media Center</div>
-    <div class="end-title">On Guard</div>
-    <div class="end-rule"></div>
-    <div class="end-meta">
-      Labrador Mountain · Truxton, New York<br>
-      Prepared by Jonah Wassersug<br>
-      Runtime: 4–6 Minutes
+    <img class="bg-img" src="https://raw.githubusercontent.com/jmwass/on-guard/main/labmountain.jpg" alt="Labrador Mountain"/>
+    <div class="dim"></div>
+    <div class="content">
+      <div class="end-mega">On<br>Guard</div>
+      <div class="end-rule"></div>
+      <div class="end-meta">
+        Labrador Mountain · Truxton, New York<br>
+        Prepared by Jonah Wassersug · Runtime: 4–6 Minutes<br>
+        Newhouse Sports Media Center
+      </div>
     </div>
   </div>
 
@@ -411,20 +396,20 @@ for (let i = 0; i < N; i++) {
 }
 function goTo(n) {
   document.getElementById(SLIDES[c]).classList.remove('active');
-  c = Math.max(0, Math.min(N - 1, n));
+  c = Math.max(0, Math.min(N-1, n));
   document.getElementById(SLIDES[c]).classList.add('active');
-  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === c));
-  document.getElementById('pb').disabled = c === 0;
-  document.getElementById('nb').disabled = c === N - 1;
-  document.getElementById('counter').textContent = String(c+1).padStart(2,'0') + ' / ' + String(N).padStart(2,'0');
-  document.getElementById('progress').style.width = ((c+1)/N*100) + '%';
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===c));
+  document.getElementById('pb').disabled = c===0;
+  document.getElementById('nb').disabled = c===N-1;
+  document.getElementById('counter').textContent = String(c+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
+  document.getElementById('progress').style.width = ((c+1)/N*100)+'%';
 }
-function go(d) { goTo(c + d); }
+function go(d) { goTo(c+d); }
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(-1);
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+  if (e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
 });
-document.getElementById('progress').style.width = (1/N*100) + '%';
+document.getElementById('progress').style.width = (1/N*100)+'%';
 </script>
 </body>
 </html>
